@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar/NavBar";
+import Navbar from "../components/navbar/Navbar";
 import PrimaryButton from "../components/inputs/Primarybutton";
 import RenderPikachu from "../components/renders/pikachu/Pikachu"
 import { getPokemons } from "../api/api"

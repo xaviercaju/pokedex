@@ -9,11 +9,8 @@
         "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
         "start": "vite --host 0.0.0.0 --port $PORT preview",
-        "heroku-postbuild": "vite build"
-    },
-    "engines": {
-        "node": "14.x",
-        "npm": "6.x"
+        "heroku-postbuild": "vite build",
+        "serve-heroku": "vite --host 0.0.0.0 --port $PORT preview"
     },
     "dependencies": {
         "react": "^18.2.0",
@@ -25,10 +22,7 @@
         "tailwindcss": "^3.3.3",
         "tailwindcss-animate": "^1.0.6",
         "vite": "^4.4.5",
-        "axios": "^1.4.0"
-
-    },
-    "devDependencies": {
+        "axios": "^1.4.0",
         "@types/react": "^18.2.15",
         "@types/react-dom": "^18.2.7",
         "eslint": "^8.45.0",
