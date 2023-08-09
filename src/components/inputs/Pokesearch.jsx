@@ -23,11 +23,9 @@ function Pokesearch() {
   }, []);
 
   useEffect(() => {
-    // Implement debouncing logic here
     const timeoutId = setTimeout(() => {
       if (searchTerm.trim() !== "") {
         setIsSearching(true);
-        // Simulate server call here
         const filteredPokemons = pokemons.filter(pokemon =>
           pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -36,7 +34,7 @@ function Pokesearch() {
       } else {
         setSearchResults([]);
       }
-    }, 500); // Adjust the debounce delay as needed
+    }, 500);
 
     return () => {
       clearTimeout(timeoutId);
@@ -56,11 +54,17 @@ function Pokesearch() {
               </div>
             ),
             className:
-              "rounded-l-full rounded-r-none border-r-0 focus:ring-0 focus:border-gray-300",
+              "rounded-xl  focus:ring-2 focus:border-red-500 focus:border-4",
+
+              style: {
+                borderRadius: "12px",
+              }
           }}
           InputLabelProps={{
             className: "bg-white px-2",
+            
           }}
+          className="rounded-md border border-gray-300" // Redondear aún más los bordes
           onChange={(event) => setSearchTerm(event.target.value)}
         />
         {searchResults.length > 0 && searchTerm.trim() !== "" && (
