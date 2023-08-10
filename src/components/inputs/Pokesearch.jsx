@@ -26,7 +26,10 @@ function Pokesearch() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target)
+      ) {
         setSearchTerm("");
         setSearchResults([]);
         setShowResults(false);
@@ -46,7 +49,7 @@ function Pokesearch() {
     const timeoutId = setTimeout(() => {
       if (searchTerm.trim() !== "") {
         setIsSearching(true);
-        const filteredPokemons = pokemons.filter(pokemon =>
+        const filteredPokemons = pokemons.filter((pokemon) =>
           pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setSearchResults(filteredPokemons);
@@ -75,10 +78,11 @@ function Pokesearch() {
                 <SearchIcon />
               </div>
             ),
-            className: "rounded-xl focus:ring-2 focus:border-red-500 focus:border-4",
+            className:
+              "rounded-xl focus:ring-2 focus:border-red-500 focus:border-4",
             style: {
               borderRadius: "12px",
-            }
+            },
           }}
           InputLabelProps={{
             className: "bg-white px-2",
@@ -90,14 +94,16 @@ function Pokesearch() {
           <div className="mt-1 bg-white rounded-md border border-gray-300 shadow-lg absolute w-full">
             {isSearching ? (
               <div className="p-2 text-center">Buscando...</div>
-            ) : searchResults.length > 0 ? (
+            ) : (
+              searchResults.length > 0 &&
               searchResults.map((pokemon) => (
-                <div key={pokemon.name} className="p-2 border-b border-gray-300">
+                <div
+                  key={pokemon.name}
+                  className="p-2 border-b border-gray-300"
+                >
                   {pokemon.name}
                 </div>
               ))
-            ) : (
-              searchTerm.trim() !== "" && <div className="p-2 text-center">No se encontraron resultados</div>
             )}
           </div>
         )}
