@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getPokemonInfo } from "../../api/api";
 import { motion } from "framer-motion";
 
@@ -27,13 +28,18 @@ function PokedexElement({ pokemon }) {
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
       <h1 className="text-lg font-semibold">{pokemon.name}</h1>
-      {pokemonInfo && (
-        <img
-          src={pokemonInfo.sprites?.front_default}
-          alt={`Sprite of ${pokemon.name}`}
-          className="mt-2 w-20 h-20"
-        />
-      )}
+      <Link
+        to={"/" + pokemon.name}
+        className="text-black dark:text-white hover:text-blue-500 transition-colors"
+      >
+        {pokemonInfo && (
+          <img
+            src={pokemonInfo.sprites?.front_default}
+            alt={`Sprite of ${pokemon.name}`}
+            className="mt-2 w-20 h-20"
+          />
+        )}
+      </Link>
     </motion.div>
   );
 }

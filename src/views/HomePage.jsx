@@ -42,7 +42,7 @@ function HomePage() {
 
   return (
     <div className="w-full">
-      <Navbar />
+
       <h1>Pokedex</h1>
       <div className="mt-36 md:mt-10">
         <Pokesearch />
