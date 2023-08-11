@@ -9,7 +9,7 @@ import HomePage from "./views/HomePage";
 import Navbar from "./components/navbar/Navbar";
 
 import "./App.css";
-import DetailPage from "./views/detailPage";
+import DetailPage from "./views/DetailPage";
 
 function AppContent() {
   const navigate = useNavigate();
