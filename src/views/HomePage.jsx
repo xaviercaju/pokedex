@@ -9,11 +9,18 @@ function HomePage() {
   const [pokemons, setPokemons] = useState([]);
   const [page, setPage] = useState(0);
   const loadRef = useRef(null);
+  const loading = useRef(false);
 
   const loadMore = async () => {
+    if (loading.current) return;
+  
+    loading.current = true;
+    console.log("Loading more items from page:", page);
     const pokemonList = await getPokemons(25, page);
-    setPage((prev) => prev + 25); // Increment page AFTER the API call
+    console.log("Fetched new items:", pokemonList.data.results);
     setPokemons((prev) => [...prev, ...pokemonList.data.results]);
+    setPage((prev) => prev + 25); // Increment page AFTER the API call
+    loading.current = false;
   };
 
   useEffect(() => {
@@ -31,7 +38,7 @@ function HomePage() {
     );
     if (loadRef.current) observer.observe(loadRef.current);
     return () => observer.disconnect();
-  }, [loadRef]);
+  }, []);
 
   return (
     <div className="w-full">
