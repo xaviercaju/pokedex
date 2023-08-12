@@ -15,7 +15,6 @@ function AppContent() {
   const navigate = useNavigate();
   return (
     <div>
-      <Navbar />
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/:name" element={<DetailPage />} />

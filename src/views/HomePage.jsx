@@ -17,7 +17,7 @@ function HomePage() {
     loading.current = true;
     console.log("Loading more items from page:", page);
     const pokemonList = await getPokemons(25, page);
-    console.log("Fetched new items:", pokemonList.data.results);
+    console.log("Fetched new items:", ...pokemonList.data.results);
     setPokemons((prev) => [...prev, ...pokemonList.data.results]);
     setPage((prev) => prev + 25); // Increment page AFTER the API call
     loading.current = false;
@@ -34,7 +34,7 @@ function HomePage() {
           loadMore();
         }
       },
-      { threshold: 1 }
+      { threshold: 0.5 }
     );
     if (loadRef.current) observer.observe(loadRef.current);
     return () => observer.disconnect();
