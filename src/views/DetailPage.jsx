@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { getPokemonInfo } from "../api/api";
 import { useEffect, useState } from "react";
+import DetailHeader from "../components/Details/DetailHeader";
+import DetailBody from "../components/Details/DetailBody";
 
 function DetailPage() {
   const { name } = useParams();
@@ -41,7 +43,7 @@ function DetailPage() {
       fairy: "bg-pink-300",
       // Add more type colors here
     };
-    
+
     return typeColors[type] || "bg-gray-500";
   };
 
@@ -55,63 +57,8 @@ function DetailPage() {
             )} rounded-t-lg`}
           />
           <div className="p-4">
-            <img
-              className="md:w-1/2 w-3/4 h-auto rounded-md my-4 p-6 m-auto"
-              src={pokemonInfo.sprites.other['official-artwork'].front_default}
-              alt={`${name} sprite`}
-            />
-            <h1 className="text-3xl font-semibold text-gray-800 mb-2 text-center capitalize">
-              {name}
-            </h1>
-            <div className="flex justify-center mb-4 capitalize">
-              {pokemonInfo.types.map((type) => (
-                <span
-                  key={type.type.name}
-                  className={`px-2 py-1 text-xs font-semibold rounded-full ${getTypeColors(
-                    type.type.name
-                  )} text-white mx-1`}
-                >
-                  {type.type.name}
-                </span>
-              ))}
-            </div>
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              Abilities
-            </h2>
-            <ul className="mb-4">
-              {pokemonInfo.abilities.map((ability) => (
-                <li key={ability.ability.name} className="text-gray-700">
-                  {ability.ability.name}
-                </li>
-              ))}
-            </ul>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <h2 className="text-xl font-semibold text-gray-800">
-                  Attributes
-                </h2>
-                <p className="text-gray-700">
-                  Base Experience: {pokemonInfo.base_experience}
-                </p>
-                <p className="text-gray-700">
-                  Height: {pokemonInfo.height / 10} meters
-                </p>
-                <p className="text-gray-700">
-                  Weight: {pokemonInfo.weight / 10} kilograms
-                </p>
-                {/* Add more attributes here */}
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-gray-800">Attacks</h2>
-                <ul>
-                  {pokemonInfo.moves.slice(0, 5).map((move) => (
-                    <li key={move.move.name} className="text-gray-700">
-                      {move.move.name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <DetailHeader pokemon={pokemonInfo} />
+            <DetailBody pokemon={pokemonInfo} />
           </div>
         </div>
       ) : (

@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import HomePage from "./views/HomePage";
 import Navbar from "./components/navbar/Navbar";
-
+import Pokesearch from "./components/inputs/Pokesearch";
 import "./App.css";
 import DetailPage from "./views/DetailPage";
 
@@ -15,6 +15,7 @@ function AppContent() {
   const navigate = useNavigate();
   return (
     <div>
+      <Pokesearch />
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/:name" element={<DetailPage />} />

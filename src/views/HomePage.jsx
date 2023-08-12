@@ -45,7 +45,7 @@ function HomePage() {
 
       <h1>Pokedex</h1>
       <div className="mt-36 md:mt-10">
-        <Pokesearch />
+
         <div className="flex flex-wrap justify-start ">
           {pokemons.map((pokemon, index) => (
             <div className="w-1/2 p-2  md:w-1/4" key={index}>
