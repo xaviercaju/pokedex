@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion"; // Importa motion de framer-motion
 import Navbar from "../components/navbar/Navbar";
-
 import { getPokemons } from "../api/api";
 import PokedexElement from "../components/Pokedex/PokedexElement";
 import Pokesearch from "../components/inputs/Pokesearch";
+
 
 function HomePage() {
   const [pokemons, setPokemons] = useState([]);
@@ -13,7 +14,7 @@ function HomePage() {
 
   const loadMore = async () => {
     if (loading.current) return;
-  
+
     loading.current = true;
     console.log("Loading more items from page:", page);
     const pokemonList = await getPokemons(25, page);
@@ -42,14 +43,18 @@ function HomePage() {
 
   return (
     <div className="w-full">
-
-      <div className="mt-36 md:mt-10">
-
+      <div className="">
         <div className="flex flex-wrap justify-start ">
           {pokemons.map((pokemon, index) => (
-            <div className="w-1/2 p-2  md:w-1/4" key={index}>
-              <PokedexElement pokemon={pokemon} />
-            </div>
+            <motion.div
+              className="w-1/2 p-2 md:w-1/4 md:pl-10 md:pr-10"
+              key={index}
+              whileHover={{ scale: 1.05 }} // Agrega la animación de escala al hacer hover
+              transition={{ duration: 0.5, ease: "easeInOut" }}  // Configuración de la transición
+
+            >
+              <PokedexElement pokemon={pokemon} delay={0.2} />
+            </motion.div>
           ))}
           <div ref={loadRef} />
         </div>

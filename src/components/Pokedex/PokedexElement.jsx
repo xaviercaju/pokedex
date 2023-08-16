@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getPokemonInfo } from "../../api/api";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 
-function PokedexElement({ pokemon }) {
+function PokedexElement({ pokemon, delay }) {
   const [pokemonInfo, setPokemonInfo] = useState(null);
+  const controls = useAnimation();
 
   useEffect(() => {
     const fetchPokemons = async () => {
       try {
         const response = await getPokemonInfo(pokemon.name);
         setPokemonInfo(response.data);
+        // Inicia la animación con un retraso y secuencia suave
+        await controls.start({ opacity: 1, y: [-20, 0], transition: { delay: delay, duration: 1, ease: "easeInOut" } });
       } catch (e) {
         console.log(e);
       }
     };
 
     fetchPokemons();
-  }, [pokemon.name]);
+  }, [controls, delay, pokemon.name]);
+
 
   const getTypeColors = (type) => {
     const typeColors = {
@@ -46,12 +50,11 @@ function PokedexElement({ pokemon }) {
 
   return (
     <motion.div
-      className="flex flex-col items-center justify-center  m-2 bg-gray-200 text-white capitalize rounded-lg shadow-md"
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-    >
+    className="flex flex-col items-center justify-center m-2 bg-gray-200 text-white capitalize rounded-lg shadow-md"
+    initial={{ opacity: 0, y: 50 }} // Estado inicial
+    animate={controls} // Aplica la animación controlada
+    transition={{ duration: 0.5, ease: "easeInOut" }}
+  >
       {pokemonInfo && (
         <div className="h-6 w-full flex">
           {pokemonInfo.types.length > 1 ? (
@@ -94,7 +97,7 @@ function PokedexElement({ pokemon }) {
               className="mt-2 w-36"
             />
           )}
-          <h1 className="text-2xl font-bold m-auto text-center">
+          <h1 className="text-xl font-bold m-auto mb-5 text-center">
             {pokemon.name}
           </h1>
         </div>
