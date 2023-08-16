@@ -43,7 +43,6 @@ function HomePage() {
   return (
     <div className="w-full">
 
-      <h1>Pokedex</h1>
       <div className="mt-36 md:mt-10">
 
         <div className="flex flex-wrap justify-start ">

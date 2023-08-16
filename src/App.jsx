@@ -15,7 +15,9 @@ function AppContent() {
   const navigate = useNavigate();
   return (
     <div>
-      <Pokesearch />
+      <div className="sticky top-0 z-50">
+        <Pokesearch />
+      </div>
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/:name" element={<DetailPage />} />

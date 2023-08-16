@@ -57,7 +57,7 @@ function Pokesearch() {
   const startHideResultsTimeout = () => {
     hideResultsTimeoutRef.current = setTimeout(() => {
       setShowResults(false);
-    }, 2000);
+    }, 5000);
   };
 
   const clearHideResultsTimeout = () => {
@@ -100,9 +100,8 @@ function Pokesearch() {
     const timeoutId = setTimeout(() => {
       if (searchTerm.trim() !== "") {
         setIsSearching(true);
-        const filteredPokemons = pokemons.filter(
-          (pokemon) =>
-            pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+        const filteredPokemons = pokemons.filter((pokemon) =>
+          pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setSearchResults(filteredPokemons);
         setIsSearching(false);
@@ -129,17 +128,18 @@ function Pokesearch() {
         <input
           type="text"
           placeholder={currentPlaceholder}
-          className="rounded-full border-gray-300 py-2 pl-8 pr-3 w-full focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition-colors"
+          className="rounded-full border-gray-300 py-2 pl-8 pr-3 w-full focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 transition-colors"
           value={searchTerm}
           onChange={(event) => setSearchTerm(event.target.value)}
           onBlur={startHideResultsTimeout}
           onFocus={() => setSearchTerm("")}
         />
+
         <div className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-400">
           <SearchIcon />
         </div>
         {showResults && (
-          <div className="mt-1 bg-white rounded-md border border-gray-300 shadow-lg absolute w-full">
+          <div className=" bg-white rounded-md mt-3 absolute w-full">
             {isSearching ? (
               <div className="p-2 text-center">Buscando...</div>
             ) : (
@@ -147,7 +147,7 @@ function Pokesearch() {
               searchResults.map((pokemon) => (
                 <Link
                   to={"/" + pokemon.name}
-                  className="text-black dark:text-white hover:text-blue-500 transition-colors block p-2 border-b border-gray-300"
+                  className="text-black  hover:text-violet-800 transition-colors block p-2 border-b border-gray-300"
                   onClick={handleResultClick}
                   key={pokemon.name}
                 >
